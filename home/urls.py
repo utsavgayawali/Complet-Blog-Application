@@ -7,4 +7,3 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('about/', views.About, name='about')
 ]
-
