@@ -9,3 +9,4 @@ admin.site.register(Profile)
 # blog
 # blog
 
+#  https://github.com/desphixs/Django-Blog
