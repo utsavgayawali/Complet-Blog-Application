@@ -1,9 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import Post
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,logout
 from django.contrib import messages
-
+from home.form import RegisterForm,LoginForm
 
 
 
@@ -22,7 +21,7 @@ def About(request):
 
 def register_view(request):
     if request.method =='POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request,user)
@@ -31,7 +30,7 @@ def register_view(request):
         else:
             messages.error(request,'Please fix the error below')
     else:
-        form = UserCreationForm()   
+        form = RegisterForm()   
 
 
     return render(request,'User/register.html',{'form':form})
@@ -42,7 +41,7 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request,data = request.POST)
+        form = LoginForm(request,data = request.POST)
         if form.is_valid():
             user= form.get_user()
             login(request,user)
@@ -51,7 +50,7 @@ def login_view(request):
         else:
             messages.error(request,'Please fix the error below')
     else:
-        form = AuthenticationForm()
+        form = LoginForm()
 
     return render(request,'User/login.html',{'form':form})
 

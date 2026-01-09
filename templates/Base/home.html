@@ -1,17 +1,18 @@
-{% extends 'Base/base.html' %} 
-{% block content %} 
-{% if post %} 
-{% for item in post %}
-<article class="media content-section my-3">
-  {% comment %} <img class="rounded-cirlce article-img" src="" alt="" /> {% endcomment %}
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2" href="#">{{item.auther}}</a>
-      <small class="text-muted">{{item.time}}</small>
-    </div>
-    <h2><a class="article-title" href="{% url 'about' %}">{{item.title}}</a></h2>
-    <p class="article-content">{{item.content}}</p>
-  </div>
-  <br />
-</article>
-{% endfor %} {% else %} {% endif %} {% endblock content %}
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block content %}
+        <article class="media content-section">
+            <img class="rounded-cirlce article-img" src="" alt="">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#"></a>
+                <small class="text-muted"></small>
+              </div>
+              {% comment %} <h2><a class="article-title" href="{% url 'about' posts.id %}"></a></h2> {% endcomment %}
+              <h2><a class="article-title" href="{% url 'about'%}"></a></h2>
+              <p class="article-content"></p>
+            </div>
+            <br>
+          </article>
+    
+{% endblock content %}

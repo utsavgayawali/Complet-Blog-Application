@@ -267,48 +267,75 @@ body {
 
 
 
-  /* ===================== FORM INPUT ===================== */
 
-.form-input {
-    width: 100%;
-    padding: 14px 16px;
-    font-size: 15px;
-    border-radius: 8px;
-    border: 1.5px solid #dcdcdc;
-    background-color: #ffffff;
-    outline: none;
-    transition: all 0.3s ease;
-    margin-bottom: 18px;
+
+
+
+  /* Profile Form Container */
+.profile-container form {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Form Groups */
+.profile-container .form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.profile-container label {
+    font-weight: 600;
+    color: #f0f0f0;
     display: block;
+    margin-bottom: 5px;
 }
 
-.form-input:focus {
-    border-color: #00bcd4;
-    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.15);
-}
-
-.form-input::placeholder {
-    color: #999;
-    font-size: 14px;
-}
-
-
-/* ===================== SUBMIT BUTTON ===================== */
-
-.btn-submit {
+/* Text Inputs and Email Inputs */
+.profile-container .form-control {
     width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: 500;
+    padding: 10px 12px;
     border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(90deg, #00bcd4, #6a5acd);
-    color: #ffffff;
-    transition: 0.3s ease;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #000;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
-.btn-submit:hover {
+.profile-container .form-control:focus {
+    border-color: #03e9f4;
+    box-shadow: 0 0 8px #03e9f4;
+    background-color: #fff;
+    outline: none;
+}
+
+/* File Input */
+.profile-container .form-control-file {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Submit Button */
+.profile-container .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(270deg, rgb(247, 0, 255) 0%, rgb(98, 0, 255) 100%);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-container .btn-primary:hover {
     opacity: 0.9;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
