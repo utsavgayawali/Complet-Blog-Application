@@ -5,28 +5,34 @@ from .models import Profile
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
+        label='Username',
         widget=forms.TextInput(attrs={
             'class': 'form-control form-input',
-            'placeholder': 'Username'
+            'placeholder': 'Username',
         })
     )
     email = forms.EmailField(
+        label='Email',
         widget=forms.EmailInput(attrs={
             'class': 'form-control form-input',
             'placeholder': 'Email address',
         })
     )
     password1 = forms.CharField(
+        label='Password',
         widget=forms.PasswordInput(attrs={
             'class': 'form-control form-input',
             'placeholder': 'Password',
         })
     )
     password2 = forms.CharField(
+        label='Confirm Password',
         widget=forms.PasswordInput(attrs={
             'class': 'form-control form-input',
             'placeholder': 'Confirm password',
         })
+        
+
     )
 
     class Meta:

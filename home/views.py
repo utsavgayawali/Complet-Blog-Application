@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from .models import Post
+from .models import Post,Profile
 from django.contrib.auth import login,logout
 from django.contrib import messages
 from home.form import RegisterForm,LoginForm
-
+from django
 
 
 def home(request):
@@ -26,7 +26,7 @@ def register_view(request):
             user = form.save()
             login(request,user)
             messages.success(request,'Account creates Sucessfully')
-            return redirect(home)
+            return redirect('home')
         else:
             messages.error(request,'Please fix the error below')
     else:
@@ -46,7 +46,7 @@ def login_view(request):
             user= form.get_user()
             login(request,user)
             messages.success(request,'Logged in Sucessfully')
-            return redirect(home)
+            return redirect('home')
         else:
             messages.error(request,'Please fix the error below')
     else:
@@ -68,4 +68,12 @@ def logout_view(request):
 
 
 def profile_view(request):
-    return render(request,'User/profile.html')
+    user = request.user
+    # It tries to fetch an object from the database,If it doesn’t exist, it creates it automatically.
+    profile,created = Profile.objects.get_or_create(user=user)
+    context= {
+        'user':user,
+        'profile':profile
+    }
+
+    return render(request,'User/profile.html',context)
