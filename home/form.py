@@ -57,12 +57,47 @@ class LoginForm(AuthenticationForm):
     )
 
 
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         fields = ['profile_pic']
-#         widgets = {
-#             'profile_pic': forms.FileInput(attrs={
-#                 'class': 'form-control-file'
-#             })
-#         }
+
+
+
+# form for updating user and profile
+class UserUpdateForm(forms.ModelForm):
+    username = forms.CharField(
+        label='Username',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control form-input',
+            'placeholder': 'Username',
+        })
+    )
+    email = forms.EmailField(
+        label='Email',
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control form-input',
+            'placeholder': 'Email address',
+        })
+    )
+    class Meta:
+        model =User
+        fields =['username','email']
+
+    
+class ProfileupdateForm(forms.ModelForm):
+    image = forms.ClearableFileInput(attrs={
+        'class':'form-control-file'
+    })
+    
+    bio = forms.Textarea(attrs={
+        'class': 'form-textarea',
+            'placeholder': 'Tell something about yourself...',
+            'rows': 4
+    })
+
+    class Meta:
+        model=Profile
+        fields =['image','bio']
+
+
+
+    
+
+

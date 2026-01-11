@@ -6,7 +6,7 @@ admin.site.register(Post)
 admin.site.register(Profile)
 
 
-# blog
-# blog
+# Blog
+# Blog
 
 #  https://github.com/desphixs/Django-Blog

@@ -7,14 +7,15 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="cardd">
+    <div class="cardd my-3">
       <!-- <img src="img.jpg" alt="John" style="width:100%"> -->
-      <div class="m-b-25">
-         <img class="rounded-circle account-img" src="{{ profile.image.url }}" class="img-radius" alt="User-Profile-Image"> 
+      <div class="m-b-25 ">
+         <img class="rounded-circle account-img my-3" src="{{ profile.image.url }}" class="img-radius" alt="User-Profile-Image"> 
         </div>
 
       <h1 id="profile-h1">{{user.username}}</h1>
-      <p class="title">{{user.content}}</p>
+       <p class="title">{{user.email }}</p>
+       <p class="title">{{user.profile.bio }}</p>
       <!-- <p>My Social Live  Below</p> -->
       <a href="#" id="auth-links"><i class="fa fa-dribbble"></i></a>
       <a href="#" id="auth-links"><i class="fa fa-twitter"></i></a>
@@ -32,7 +33,7 @@
 <!--            </div>-->
         </form>
 
-      {% comment %} <p><button id="btn-profile"><a href="{% url 'profile-update' %}" id="auth-links"> {% endcomment %}
+      <p><button id="btn-profile"><a href="{% url 'profile_update' %}" id="auth-links">
         <span></span>
         <span></span>
         <span></span>
