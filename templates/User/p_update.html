@@ -3,29 +3,71 @@
 
 {% block content %}
 <style>
-    body { background-color: #f8f9fa !important; background-image: none !important; }
-    .content-section { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 20px; }
-    legend { font-weight: bold; color: #6200ff; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+    body {
+        background-color: #f8f9fa !important;
+        background-image: none !important;
+    }
+
+    .content-section {
+        background: #ffffff;
+        padding: 25px 30px;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        margin-top: 25px;
+    }
+
+    legend {
+        font-weight: 600;
+        color: #6200ff;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+
+    /* ===== Update Profile Button (Matching Project UI) ===== */
+    .btn-update {
+        background: linear-gradient(270deg, rgb(247, 0, 255) 0%, rgb(98, 0, 255) 100%);
+        color: #ffffff;
+        border: none;
+        padding: 12px 28px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .btn-update:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(98, 0, 255, 0.35);
+    }
+
+    .btn-update:active {
+        transform: scale(0.97);
+    }
 </style>
 
-<div class="content-section"> <h2 id="profile-h1" style="color: #333;">Update Profile</h2>
+<div class="content-section">
+    <h2 id="profile-h1" style="color: #333;">Update Profile</h2>
 
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-    <fieldset class="form-group">
-      <legend>Account Info</legend>
-       {{ user_form.as_p }}
-    </fieldset>
+        <fieldset class="form-group">
+            <legend>Account Info</legend>
+            {{ user_form.as_p }}
+        </fieldset>
 
-    <fieldset class="form-group">
-      <legend>Profile Info</legend>
-      {{ profile_form.as_p }}
-    </fieldset>
+        <fieldset class="form-group">
+            <legend>Profile Info</legend>
+            {{ profile_form.as_p }}
+        </fieldset>
 
-    <button type="submit" class="btn-update">
-      Update Profile
-    </button>
-  </form>
+        <button type="submit" class="btn-update">
+            Update Profile
+        </button>
+    </form>
 </div>
 {% endblock %}

@@ -1,36 +1,39 @@
-{% extends 'Base/base.html' %} {% load static %} {% block content %}
+{% extends 'Base/base.html' %} {% load static %} {% block content %} 
 {% if request.user.is_authenticated %}
 <article class="media content-section mx-3 my-3">
-  {% comment %} <img class="rounded-cirlce article-img" src="" alt="" /> {% endcomment %}
-  {% if post %} 
-  {% for item in post %}
+  {% if post %}
+   {% for item in post %}
   <div class="media-body">
     <div class="article-metadata">
-        <img
-    src="{{item.auther.profile.image.url}}"
-    alt="{{ item.auther.username }}"
-    class="rounded-circle mr-2"
-    width="40"
-    height="40"
-  />
-      <a class="mr-2" href="#">{{item.auther.username}}</a>
+      <img
+        src="{{item.auther.profile.image.url}}"
+        alt="{{ item.auther.username }}"
+        class="rounded-circle mr-2"
+        width="40"
+        height="40"
+      />
+      <a class="mr-2" href="{% url 'profile' %}">{{item.auther.username}}</a>
       <small class="text-muted">{{item.time}}</small>
     </div>
     {% comment %}
     <h2><a class="article-title" href="{% url 'about' posts.id %}"></a></h2>
     {% endcomment %}
-    <h2><a class="article-title" href="{% url 'about'%}"></a>{{item.title}}</h2>
+    <h2>
+      <a
+        class="article-title"
+        href="{% url 'about' item.id %}"
+        style="color: black; text-decoration: none"
+      >
+        {{ item.title }}
+      </a>
+    </h2>
+
     <p class="article-content">{{item.content}}</p>
   </div>
-  {% endfor %} 
-  {% else %} 
-    <p class="text-muted">No posts available.</p>
+  {% endfor %} {% else %}
+  <p class="text-muted">No posts available.</p>
   {% endif %}
-
-  {% else %}
-  
-{% endif %}
   <br />
 </article>
 
-{% endblock content %}
+{% else %} {% endif %} {% endblock content %}

@@ -1,7 +1,47 @@
 {% extends 'Base/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container" style="background: white; padding: 20px; margin-top: 10px; border-radius: 20px;">
-        <h1>Blog About</h1>
+    <div class="container mx-auto px-4 py-10 flex flex-col md:flex-row gap-8">
+  
+  <!-- Main Post Content -->
+  <div class="flex-1 bg-white shadow-lg rounded-xl p-8">
+    <!-- Post title -->
+    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+      {{ post.title }}
+    </h1>
+
+    <!-- Author -->
+    {% if post.author %}
+    <p class="text-gray-600 text-sm mb-6">
+      By <span class="font-semibold">{{ post.author.username }}</span>
+    </p>
+    {% endif %}
+
+    <!-- Post content -->
+    <div class="prose max-w-none text-gray-800">
+      {{ post.content|linebreaks }}
     </div>
+
+    <!-- Posted date -->
+    <p class="text-gray-400 mt-6 text-sm">
+      Posted on: {{post.time}}
+    </p>
+  </div>
+
+  <!-- Sidebar -->
+  {% comment %} <div class="w-full md:w-1/3">
+    <div class="bg-white shadow-lg rounded-xl p-6">
+      <h2 class="font-bold text-lg mb-4 border-b pb-2">Latest Posts</h2>
+      {% for latest in post|slice:":5" %}
+      <a href="{% url 'about' latest.id %}" class="block mb-4 hover:bg-gray-100 rounded-md p-2 transition">
+        <h3 class="font-semibold text-gray-800">{{ latest.title }}</h3>
+        {% if latest.author %}
+        <p class="text-gray-500 text-xs">By {{ latest.author.username }}</p>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </div> {% endcomment %}
+
+</div>
 {% endblock content %}

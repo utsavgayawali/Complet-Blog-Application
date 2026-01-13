@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Post,Profile
 from django.contrib.auth import login,logout
 from django.contrib import messages
@@ -7,14 +7,15 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-
     context={
         'post':Post.objects.all()
     }
     return render(request,'Base/home.html',context)
 
-def About(request):
-    return render(request,'Base/about.html')
+
+def About(request,id):
+    post = get_object_or_404(Post,id=id)
+    return render(request,'Base/about.html',{'post':post})
 
 
 
