@@ -3,81 +3,78 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Django Blog</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Django Blog</title>
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
-                <svg id="Capa_1" enable-background="new 0 0 512 512" height="30" viewBox="0 0 512 512" width="30" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                    <g><path d="m512 45c0-24.853-20.147-45-45-45h-422c-24.853 0-45 20.147-45 45v90c0 8.284 6.716 15 15 15h482c8.284 0 15-6.716 15-15z" fill="#7d81e7"/><path d="m467 0h-211v150h241c8.284 0 15-6.716 15-15v-90c0-24.853-20.147-45-45-45z" fill="#5e69e2"/><g><g><path d="m81 82.5h-20c-8.284 0-15-6.716-15-15s6.716-15 15-15h20c8.284 0 15 6.716 15 15s-6.716 15-15 15z" fill="#fff79f"/></g><g><path d="m161 82.5h-20c-8.284 0-15-6.716-15-15s6.716-15 15-15h20c8.284 0 15 6.716 15 15s-6.716 15-15 15z" fill="#90e36a"/></g><g><path d="m241 82.5h-20c-8.284 0-15-6.716-15-15s6.716-15 15-15h20c8.284 0 15 6.716 15 15s-6.716 15-15 15z" fill="#ff80a7"/></g></g><g><path d="m0 135v332c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45v-332z" fill="#f9f9f9"/></g><path d="m256 512h211c24.813 0 45-20.187 45-45v-332h-256z" fill="#e2dff4"/></g>
-                </svg>
-                <span class="font-weight-bold">Django Blog</span>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarToggle">
-                <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{% url 'home' %}">HOME</a>
-                    {% comment %} <a class="nav-item nav-link" href="{% url 'about' %}">ABOUT</a> {% endcomment %}
-                </div>
-
-                <div class="navbar-nav">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'home' %}" class="auth-links">Create Post</a>
-                        <a href="{% url 'profile' %}" class="auth-links">Profile</a>
-                        <a href="{% url 'logout' %}" class="auth-links">Logout</a>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="auth-links">Login</a>
-                        <a href="{% url 'register' %}" class="auth-links">Register</a>
-                    {% endif %}
-                </div>
+          <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+            <svg height="30" viewBox="0 0 512 512" width="30" class="mr-2">
+                <g><path d="m512 45c0-24.853-20.147-45-45-45h-422c-24.853 0-45 20.147-45 45v90c0 8.284 6.716 15 15 15h482c8.284 0 15-6.716 15-15z" fill="#7d81e7"/><path d="m0 135v332c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45v-332z" fill="#f9f9f9"/></g>
+            </svg>
+            Django Blog
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'home' %}">HOME</a>
             </div>
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+                <a class="auth-links" href="{% url 'create_post' %}">Create Post</a>
+                <a class="auth-links" href="{% url 'profile' %}">Profile</a>
+                <a class="auth-links" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a class="auth-links" href="{% url 'login' %}">Login</a>
+                <a class="auth-links" href="{% url 'register' %}">Register</a>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </nav>
     </header>
 
-    <main role="main" class="container mt-5 pt-5">
+    <main class="container">
       <div class="row">
         <div class="col-md-8">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} shadow-sm">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% block content %}{% endblock %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}{% endblock %}
         </div>
-
+        {% if request.resolver_match.url_name == 'home' %}
         <div class="col-md-4">
-          <div class="content-section shadow-sm border-0">
-            <h5 class="mb-3 font-weight-bold" id="gist-btn" style="display:inline-block; width: auto;">Latest Gists</h5>
-            <div class="list-group list-group-flush mt-2">
-                <a href="#" class="list-group-item list-group-item-action px-0">
-                    <div class="d-flex w-100 justify-content-between">
-                        <strong class="mb-1">Stop Teaching Toddlers to Code</strong>
-                        <small>Wed</small>
-                    </div>
-                    <p class="mb-1 small text-muted">By Desphixs - Exploring the 1995 cult movie obsession...</p>
-                </a>
-                </div>
+          <div class="content-section">
+            <h5 class="auth-links" style="display:inline-block; margin-left:0; pointer-events: none;">Latest Gists</h5>
+            <div class="list-group list-group-flush mt-3">
+                <a href="#" class="list-group-item list-group-item-action px-0 border-0">Stop Teaching Toddlers to Code <small class="text-muted">Wed</small></a>
+                <a href="#" class="list-group-item list-group-item-action px-0 border-0">It's not a bug - It's a feature <small class="text-muted">Tue</small></a>
+            </div>
           </div>
         </div>
+        {% endif %}
       </div>
     </main>
 
-    <footer class="text-center py-4 mt-5 border-top bg-white">
-        <p class="text-muted mb-0">&copy; 2026 Desphixs Blog</p>
+    <footer class="main-footer mt-5">
+      <div class="container text-center py-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Admin</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+          </ul>
+          <p class="text-muted">&copy; 2026 Desphixs Blog</p>
+      </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

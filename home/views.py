@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Post,Profile
 from django.contrib.auth import login,logout
 from django.contrib import messages
-from home.form import RegisterForm,LoginForm,ProfileupdateForm,UserUpdateForm
+from home.form import RegisterForm,LoginForm,ProfileupdateForm,UserUpdateForm,CreatePostForm
 from django.contrib.auth.decorators import login_required
+from django.utils.text import slugify
 
 
 def home(request):
@@ -13,9 +14,24 @@ def home(request):
     return render(request,'Base/home.html',context)
 
 
-def About(request,id):
-    post = get_object_or_404(Post,id=id)
+def About(request,slug):
+    post = get_object_or_404(Post,slug=slug)
     return render(request,'Base/about.html',{'post':post})
+
+
+def create_post(request):
+    if request.method =="POST":
+        form = CreatePostForm(request.POST,request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author =request.user
+            post.slug=slugify(post.title)
+            post.save()
+            return redirect('home')
+    else:
+        form = CreatePostForm()
+
+    return render(request,'Base/create_post.html',{'form':form})
 
 
 

@@ -1,39 +1,23 @@
-{% extends 'Base/base.html' %} {% load static %} {% block content %} 
+{% extends 'Base/base.html' %}
+{% block content %}
 {% if request.user.is_authenticated %}
-<article class="media content-section mx-3 my-3">
-  {% if post %}
-   {% for item in post %}
-  <div class="media-body">
-    <div class="article-metadata">
-      <img
-        src="{{item.auther.profile.image.url}}"
-        alt="{{ item.auther.username }}"
-        class="rounded-circle mr-2"
-        width="40"
-        height="40"
-      />
-      <a class="mr-2" href="{% url 'profile' %}">{{item.auther.username}}</a>
-      <small class="text-muted">{{item.time}}</small>
+    {% for item in post %}
+    <article class="content-section">
+        <div class="article-metadata">
+            <a href="{% url 'profile' %}"><strong>{{ item.auther.username }}</strong></a>
+            <small class="text-muted ml-2">{{ item.time }}</small>
+        </div>
+        <h2><a class="article-title" href="{% url 'post_detail' slug=item.slug %}">{{ item.title }}</a></h2>
+        {% if item.image %}
+            <img src="{{ item.image.url }}" class="article-img-home">
+        {% endif %}
+        <p class="mt-3">{{ item.content|truncatewords:40 }}</p>
+    </article>
+    {% endfor %}
+{% else %}
+    <div class="jumbotron text-center bg-white border shadow-sm" style="border-radius: 15px; padding: 4rem 2rem;">
+        <h1 class="display-4">Welcome to the Blog</h1>
+        <p class="lead">Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a> to view the blog posts.</p>
     </div>
-    {% comment %}
-    <h2><a class="article-title" href="{% url 'about' posts.id %}"></a></h2>
-    {% endcomment %}
-    <h2>
-      <a
-        class="article-title"
-        href="{% url 'about' item.id %}"
-        style="color: black; text-decoration: none"
-      >
-        {{ item.title }}
-      </a>
-    </h2>
-
-    <p class="article-content">{{item.content}}</p>
-  </div>
-  {% endfor %} {% else %}
-  <p class="text-muted">No posts available.</p>
-  {% endif %}
-  <br />
-</article>
-
-{% else %} {% endif %} {% endblock content %}
+{% endif %}
+{% endblock %}

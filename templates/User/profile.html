@@ -2,50 +2,34 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-<!-- Font Awesome -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
+<div class="article-container text-center mx-3">
+    <div class="text-center">
+        <img src="{{ profile.image.url }}" class="account-img" alt="{{ user.username }}" />
+    </div>
 
-<div class="cardd my-4 text-center">
+    <h1 class="account-heading mt-2">{{ user.username }}</h1>
+    <p class="text-muted" style="font-size: 1.1rem;">{{ user.email }}</p>
 
-  <!-- Profile Image -->
-  <div class="m-b-25">
-    <img
-      src="{{ profile.image.url }}"
-      class="profile-image my-3"
-      alt="{{ user.username }} Profile Image"
-      loading="lazy"
-    />
-  </div>
+    <div class="px-4">
+        {% if user.profile.bio %}
+            <p class="article-content">{{ user.profile.bio }}</p>
+        {% else %}
+            <p class="article-content text-muted">No bio added yet.</p>
+        {% endif %}
+    </div>
 
-  <!-- User Info -->
-  <h1 id="profile-h1">{{ user.username }}</h1>
-  <p class="title">{{ user.email }}</p>
+    <div class="social-links my-4">
+        <a href="#" class="mx-2" style="color: #8a2be2; font-size: 20px;"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="mx-2" style="color: #8a2be2; font-size: 20px;"><i class="fa fa-linkedin"></i></a>
+        <a href="#" class="mx-2" style="color: #8a2be2; font-size: 20px;"><i class="fa fa-facebook"></i></a>
+    </div>
 
-  {% if user.profile.bio %}
-    <p class="title">{{ user.profile.bio }}</p>
-  {% else %}
-    <p class="title text-muted">No bio added yet.</p>
-  {% endif %}
-
-  <!-- Social Icons -->
-  <div class="social-links my-3">
-    <a href="#" class="auth-links"><i class="fa fa-dribbble"></i></a>
-    <a href="#" class="auth-links"><i class="fa fa-twitter"></i></a>
-    <a href="#" class="auth-links"><i class="fa fa-linkedin"></i></a>
-    <a href="#" class="auth-links"><i class="fa fa-facebook"></i></a>
-  </div>
-
-  <!-- Update Profile Button -->
-  <div class="my-4">
-    <a href="{% url 'profile_update' %}" class="auth-links btn-profile">
-      Update Profile
-    </a>
-  </div>
-
+    <div class="pb-3">
+        <a href="{% url 'profile_update' %}" class="auth-links">
+            Update Profile
+        </a>
+    </div>
 </div>
-
 {% endblock content %}

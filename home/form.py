@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Profile
+from .models import Profile,Post
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
@@ -99,5 +99,33 @@ class ProfileupdateForm(forms.ModelForm):
 
 
     
+#  form for crating post 
+
+class CreatePostForm(forms.ModelForm):
+     title = forms.CharField(
+        label='Title',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control form-input',
+            'placeholder': 'Post Title',
+        })
+    )
+     content = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-textarea',
+            'placeholder': 'Write your post here..',
+            'rows': 4
+        })
+    )
+     image = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={
+            'class':'form-control-file'
+            
+        })
+    )
+
+     class Meta:
+        model = Post
+        fields =['title','content','image']
+
 
 
