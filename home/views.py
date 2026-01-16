@@ -31,7 +31,32 @@ def create_post(request):
     else:
         form = CreatePostForm()
 
-    return render(request,'Base/create_post.html',{'form':form})
+    return render(request,'Base/create_post.html',{'form':form,"title": "Create Post", "button_text": "Create Post"})
+
+  
+
+def edit_post(request,slug):
+    post = get_object_or_404(Post,slug=slug)
+
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST,request.FILES,instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CreatePostForm(instance=post)
+
+    return render(request,'Base/create_post.html',{'form':form,"title": "Edit Post", "button_text": "Update"})
+
+ 
+def delete_post(request,slug):
+    post = get_object_or_404(Post,slug=slug)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('home')
+    return render(request,'Base/confirm_delete.html',{'post':post})
+
+
 
 
 
@@ -115,3 +140,5 @@ def profile_update(request):
 
 
     return render(request,'User/p_update.html',context)
+
+

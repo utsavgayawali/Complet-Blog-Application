@@ -3,9 +3,22 @@
 {% if request.user.is_authenticated %}
     {% for item in post %}
     <article class="content-section">
-        <div class="article-metadata">
-            <a href="{% url 'profile' %}"><strong>{{ item.auther.username }}</strong></a>
-            <small class="text-muted ml-2">{{ item.time }}</small>
+        <div class="article-metadata d-flex justify-content-between align-items-center">
+            <div>
+                <a href="{% url 'profile' %}"><strong>{{ item.auther.username }}</strong></a>
+                <small class="text-muted ml-2">{{ item.time }}</small>
+            </div>
+            {% comment %} {% if item.auther == request.user %} {% endcomment %}
+            <div class="dropdown">
+                <button class="btn btn-link text-dark p-0 post-options-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    &#8942;
+                </button>
+                <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
+                    <a class="dropdown-item" href="{% url 'edit_post' slug=item.slug %}">Edit Post</a>
+                    <a class="dropdown-item text-danger" href="{% url 'delete_post' slug=item.slug %}">Delete Post</a>
+                </div>
+            </div>
+            {% comment %} {% endif %} {% endcomment %}
         </div>
         <h2><a class="article-title" href="{% url 'post_detail' slug=item.slug %}">{{ item.title }}</a></h2>
         {% if item.image %}

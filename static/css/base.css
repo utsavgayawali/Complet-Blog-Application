@@ -150,3 +150,24 @@ legend {
     border: none !important;
 }
 
+.post-options-btn {
+    text-decoration: none !important;
+    font-size: 1.4rem;
+    color: #333 !important;
+    transition: 0.2s;
+}
+
+.post-options-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+    padding: 8px 0;
+}
+
+.dropdown-item {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+}

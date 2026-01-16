@@ -40,12 +40,8 @@ class Post(models.Model):
                new_height = int(img.height * ratio)
                img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
                img.save(self.image.path, optimize=True, quality=70)
-
-
-    # to resize image in post if the image is too large 
         
     
-
     def __str__(self):
         return self.title
 
